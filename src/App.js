@@ -8,7 +8,8 @@ import Cart from "./pages/Cart";
 import Blog from "./pages/Blog";
 import Navigation from "./components/Navigation";
 import PlantSearch from "./components/PlantSearch";
-import './App.css';
+import Footer from "./components/Footer";
+import "./App.css";
 
 // Import JSON data
 import plantsData from "./data/plants.json";
@@ -46,6 +47,7 @@ function App() {
         <Route path="/blog" element={<Blog blogs={blogs} />} />
       </Routes>
       <PlantSearch plants={plants} />
+      <Footer />
     </Router>
   );
 }
