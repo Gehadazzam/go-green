@@ -7,6 +7,8 @@ module.exports = {
       backgroundImage: {
         smallland: "url('landsmall.jpg')",
         land: "url('landbg.jpg')",
+        sign: "url('signin.jpg')",
+        signBg: "url('signup.jpg')",
       },
       fontFamily: {
         sans: ["Nunito", ...theme.fontFamily.sans],

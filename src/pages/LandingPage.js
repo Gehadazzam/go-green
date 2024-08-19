@@ -50,7 +50,7 @@ const LandingPage = () => {
 
   return (
     <div className="font-sans bg-[#DAD7CD]">
-          <div className="max-h-screen lg:min-h-screen bg-smallland lg:bg-land flex bg-cover pt-16 lg:items-center lg:justify-end">
+      <div className="max-h-screen lg:min-h-screen bg-smallland lg:bg-land flex bg-cover pt-16 lg:items-center lg:justify-end">
         <div className="max-w-4xl p-6 lg:mr-16 lg:ml-0 lg:mt-0">
           <h1 className="text-2xl lg:text-4xl font-bold text-green-800 mb-6 text-right lg:text-left">
             <span className="">Welcome to</span> LEAF & BLOOM
@@ -92,7 +92,9 @@ const LandingPage = () => {
               <p className="text-center mt-4 text-[#3A5A40]">Loading...</p>
             ) : searchResults ? (
               <div>
-                <h3 className="text-xl font-semibold text-[#3A5A40] mt-6 mb-4">Search Results</h3>
+                <h3 className="text-xl font-semibold text-[#3A5A40] mt-6 mb-4">
+                  Search Results
+                </h3>
                 <PlantList
                   plants={searchResults.data}
                   page={page}
@@ -103,7 +105,9 @@ const LandingPage = () => {
               </div>
             ) : (
               <div>
-                <h3 className="text-xl font-semibold text-[#3A5A40] mt-6 mb-4">Featured Plants</h3>
+                <h3 className="text-xl font-semibold text-[#3A5A40] mt-6 mb-4">
+                  Featured Plants
+                </h3>
                 <PlantList
                   plants={plants}
                   page={page}

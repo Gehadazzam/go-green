@@ -10,7 +10,7 @@ function Navigation() {
   };
 
   return (
-    <nav className="bg-green-600 p-4 fixed w-full">
+    <nav className="bg-green-600 p-4 fixed w-full z-10">
       <div className="container mx-auto flex items-center justify-between">
         <div className="flex">
           <img src={icon} alt="Logo" />

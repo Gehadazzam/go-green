@@ -7,10 +7,10 @@ import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import Blog from "./pages/Blog";
 import Navigation from "./components/Navigation";
-import PlantList from './components/PlantList';
-import SearchBar from './components/SearchBar';
-import FilterComponent from './components/FilterComponent';
-import { searchPlants, getPlants } from './api';
+import PlantList from "./components/PlantList";
+import SearchBar from "./components/SearchBar";
+import FilterComponent from "./components/FilterComponent";
+import { searchPlants, getPlants } from "./api";
 import Footer from "./components/Footer";
 import "./App.css";
 
@@ -40,7 +40,7 @@ function App() {
       setPlants(data.data);
       setLoading(false);
     } catch (error) {
-      console.error('Error fetching initial plants:', error);
+      console.error("Error fetching initial plants:", error);
       setLoading(false);
     }
   };
@@ -55,7 +55,7 @@ function App() {
       const results = await searchPlants(query);
       setSearchResults(results.data);
     } catch (error) {
-      console.error('Error searching plants:', error);
+      console.error("Error searching plants:", error);
     }
     setLoading(false);
   };
@@ -87,7 +87,11 @@ function App() {
                   <PlantList plants={searchResults} addToCart={addToCart} />
                 </div>
               ) : (
-                <PlantList plants={plants} filters={filters} addToCart={addToCart} />
+                <PlantList
+                  plants={plants}
+                  filters={filters}
+                  addToCart={addToCart}
+                />
               )}
               <Home plants={plants} addToCart={addToCart} />
             </>
