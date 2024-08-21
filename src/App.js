@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Provider } from 'react-redux';
+import store from './redux/store';
 import LandingPage from "./pages/LandingPage";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
 import Blog from "./pages/Blog";
+import About from "./pages/About";
 import Navigation from "./components/Navigation";
 import PlantList from "./components/PlantList";
 import SearchBar from "./components/SearchBar";
+import ProductList from './components/ProductList';
 import FilterComponent from "./components/FilterComponent";
 import { searchPlants, getPlants } from "./api";
 import Footer from "./components/Footer";
@@ -66,6 +70,7 @@ function App() {
   };
 
   return (
+    <Provider store={store}>
     <Router>
       <Navigation cartItemCount={cart.length} />
       <Routes>
@@ -97,11 +102,14 @@ function App() {
             </>
           }
         />
-        <Route path="/cart" element={<Cart cartItems={cart} />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/blog" element={<Blog blogs={blogs} />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/products" element={<ProductList />} /> {/* Route for ProductList */}
       </Routes>
       <Footer />
     </Router>
+    </Provider>
   );
 }
 
