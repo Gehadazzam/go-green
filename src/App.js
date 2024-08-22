@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import LandingPage from "./pages/LandingPage";
+import PlantEncyclopedia from "./pages/PlantEncyclopedia";
+import Contact from "./pages/Contact";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import Home from "./pages/Home";
@@ -22,6 +24,9 @@ import "./App.css";
 import plantsData from "./data/plants.json";
 import usersData from "./data/users.json";
 import blogsData from "./data/blogs.json";
+
+import emailjs from '@emailjs/browser';
+emailjs.init(process.env.REACT_APP_PUBLIC_KEY);
 
 function App() {
   const [plants, setPlants] = useState([]);
@@ -77,6 +82,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/signin" element={<SignIn />} />
+        <Route path="/contact" element={<Contact />} />
         <Route
           path="/home"
           element={
@@ -102,6 +108,7 @@ function App() {
             </>
           }
         />
+        <Route path="/plant-encyclopedia" element={<PlantEncyclopedia />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/blog" element={<Blog blogs={blogs} />} />
         <Route path="/about" element={<About />} />
