@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
 
 const Contact = () => {
@@ -18,6 +18,7 @@ const Contact = () => {
     return errors;
   };
   
+  const form = useRef();
   const handleFormSubmission = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -36,6 +37,7 @@ const Contact = () => {
         process.env.REACT_APP_SERVICE_ID,
         process.env.REACT_APP_TEMPLATE_ID,
         e.target,
+        form.current,
         process.env.REACT_APP_PUBLIC_KEY
       );
 
@@ -54,7 +56,7 @@ const Contact = () => {
 
   return (
     <main className='pt-[3rem] pb-[2.5rem]'>
-      <form onSubmit={handleFormSubmission} className="mt-[3rem] max-w-md mx-auto p-6 bg-gradient-to-br from-green-50 to-yellow-50 rounded-lg shadow-lg border border-green-200 transform hover:scale-105 transition-transform duration-300">
+      <form ref={form} onSubmit={handleFormSubmission} className="mt-[3rem] max-w-md mx-auto p-6 bg-gradient-to-br from-green-50 to-yellow-50 rounded-lg shadow-lg border border-green-200 transform hover:scale-105 transition-transform duration-300">
         <h2 className="text-3xl font-extrabold mb-6 text-green-800 text-center">Grow With Us</h2>
 
         <div className="space-y-4">
