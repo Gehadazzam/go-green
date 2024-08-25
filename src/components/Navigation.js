@@ -35,7 +35,7 @@ function Navigation() {
             isMenuOpen ? "flex" : "hidden"
           } md:flex flex-col md:flex-row absolute md:relative left-0 right-0 top-16 md:top-auto bg-green-500 md:bg-transparent p-4 md:p-0 space-y-4 md:space-y-0 md:space-x-6 text-white items-center`}
         >
-          {["Home", "About", "Contact", "Blog", "Products"].map((item) => (
+          {["Home", "About", "Contact", "Blog"].map((item) => (
             <li key={item} className="flex items-center">
               <a
                 className="block no-underline hover:underline"
@@ -45,6 +45,49 @@ function Navigation() {
               </a>
             </li>
           ))}
+          <li className="relative">
+            <button
+              className="flex items-center no-underline hover:underline"
+              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+            >
+              Plants{" "}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="w-4 h-4 ml-2"
+              >
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            {isDropdownOpen && (
+              <ul className="absolute left-0 bg-green-500 p-4 rounded-md mt-2">
+                <li>
+                  <a
+                    href="/plant-encyclopedia"
+                    className="block no-underline hover:underline text-white"
+                  >
+                    Plant Encyclopedia
+                  </a>
+                </li>
+                <li className="mt-2">
+                  <a
+                    href="/products"
+                    className="block no-underline hover:underline text-white"
+                  >
+                    Products
+                  </a>
+                </li>
+              </ul>
+            )}
+          </li>
+
           <div className="relative flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
