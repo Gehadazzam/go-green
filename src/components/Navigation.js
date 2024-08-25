@@ -1,18 +1,19 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import icon from "../icon.svg";
 import { useNavigate } from "react-router-dom";
+import icon from "../icon.svg";
 
 function Navigation() {
   const [showCart, setShowCart] = useState(false);
-
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const navigate = useNavigate();
+
   const handleCartClick = (e) => {
     e.preventDefault();
     setShowCart(true);
   };
+
   const toggleMenu = () => setIsMenuOpen((prev) => !prev);
 
   return (
@@ -57,7 +58,7 @@ function Navigation() {
               <path d="M12 2a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm9 11v-1a7 7 0 0 0-7-7h-4a7 7 0 0 0-7 7v1h2v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1z"></path>
             </svg>
             {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-32 mx-auto bg-green-50  rounded-md shadow-lg py-1 z-10">
+              <div className="absolute right-0 mt-2 w-32 mx-auto bg-green-50 rounded-md shadow-lg py-1 z-10">
                 <button
                   onClick={() => navigate("/signIn")}
                   className="block px-4 py-2 text-sm text-black hover:bg-green-200 w-full text-left"
