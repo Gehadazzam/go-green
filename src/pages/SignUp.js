@@ -53,9 +53,14 @@ const SignUp = () => {
     const appVerifier = window.recaptchaVerifier;
 
     try {
+      // Ensure the phone number is in the correct format (E.164)
+      const formattedPhoneNumber = phoneNumber.startsWith("+")
+        ? phoneNumber
+        : `+${phoneNumber}`;
+
       const confirmationResult = await signInWithPhoneNumber(
         auth,
-        phoneNumber,
+        formattedPhoneNumber,
         appVerifier
       );
       window.confirmationResult = confirmationResult;
@@ -63,7 +68,21 @@ const SignUp = () => {
       setError("");
     } catch (error) {
       console.error("Error during phone sign-up:", error);
-      setError("Failed to send SMS. Please try again.");
+
+      // Provide more specific error messages
+      if (error.code === "auth/invalid-phone-number") {
+        setError(
+          "Invalid phone number format. Please use the international format (e.g., +201550112675)."
+        );
+      } else if (error.code === "auth/too-many-requests") {
+        setError("Too many requests. Please try again later.");
+      } else if (error.code === "auth/captcha-check-failed") {
+        setError("reCAPTCHA verification failed. Please try again.");
+      } else {
+        setError(
+          "Failed to send SMS. Please check your phone number and try again."
+        );
+      }
 
       // Reset reCAPTCHA
       if (window.recaptchaWidgetId) {
