@@ -34,19 +34,24 @@ const SignUp = () => {
 
   useEffect(() => {
     if (!window.recaptchaVerifier) {
-      window.recaptchaVerifier = new RecaptchaVerifier(
-        auth,
-        "recaptcha-container",
-        {
-          size: "invisible",
-          callback: () => {
-            handleSubmit();
-          },
-          "expired-callback": () => {},
-        }
-      );
+        window.recaptchaVerifier = new RecaptchaVerifier(
+            'recaptcha-container', // This should be the ID of your container, as a string.
+            {
+                size: 'invisible',
+                callback: (response) => {
+                    // reCAPTCHA solved, allow signInWithPhoneNumber.
+                    handleSubmit();
+                },
+                'expired-callback': () => {
+                    // Reset reCAPTCHA if it expires.
+                    window.recaptchaVerifier.reset();
+                },
+            },
+            auth // Pass the auth instance as the third parameter.
+        );
     }
-  }, []);
+}, []);
+
 
   const handlePhoneSignUp = async () => {
     const phoneNumber = formData.emailOrPhone;
