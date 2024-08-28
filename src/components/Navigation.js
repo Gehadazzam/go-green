@@ -35,7 +35,7 @@ function Navigation() {
             isMenuOpen ? "flex" : "hidden"
           } md:flex flex-col md:flex-row absolute md:relative left-0 right-0 top-16 md:top-auto bg-green-500 md:bg-transparent p-4 md:p-0 space-y-4 md:space-y-0 md:space-x-6 text-white items-center`}
         >
-          {["Home", "About", "Contact", "Blog"].map((item) => (
+          {["Home", "About", "Contact", "Blog", "community"].map((item) => (
             <li key={item} className="flex items-center">
               <a
                 className="block no-underline hover:underline"
