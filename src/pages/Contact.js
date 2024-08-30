@@ -17,7 +17,6 @@ const Contact = () => {
     if (!formData.get('message')) errors.message = 'Message cannot be empty';
     return errors;
   };
-  
   const form = useRef();
   const handleFormSubmission = async (e) => {
     e.preventDefault();
