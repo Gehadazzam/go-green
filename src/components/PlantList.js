@@ -20,16 +20,16 @@ const PlantList = ({ plants, page, setPage, totalPages, isSearchResult }) => {
         ))}
       </div>
       <div className="mt-6 flex justify-center">
-        <button 
-          onClick={() => setPage(prev => Math.max(prev - 1, 1))} 
+        <button
+          onClick={() => setPage(prev => Math.max(prev - 1, 1))}
           disabled={page === 1}
           className="bg-[#588157] text-white px-4 py-2 rounded-l-md disabled:opacity-50"
         >
           Previous
         </button>
         <span className="bg-[#588157] text-white px-4 py-2">Page {page} of {totalPages}</span>
-        <button 
-          onClick={() => setPage(prev => Math.min(prev + 1, totalPages))} 
+        <button
+          onClick={() => setPage(prev => Math.min(prev + 1, totalPages))}
           disabled={page === totalPages}
           className="bg-[#588157] text-white px-4 py-2 rounded-r-md disabled:opacity-50"
         >

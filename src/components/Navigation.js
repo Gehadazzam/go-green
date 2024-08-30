@@ -1,148 +1,121 @@
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { useState, useCallback } from "react";
+import { Menu, X, ChevronDown, User, ShoppingBag, Leaf } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import icon from "../icon.svg";
+const MENU_ITEMS = ["Home", "About", "Contact", "Blog", "Community"];
+const PLANT_SUBMENU = [
+  { name: "Plant Encyclopedia", path: "/plant-encyclopedia" },
+  { name: "Products", path: "/products" },
+];
+
+// Custom Tooltip component
+const Tooltip = ({ children, content }) => {
+  return (
+    <div className="relative group">
+      {children}
+      <div className="absolute z-10 invisible group-hover:visible bg-amber-50 text-green-800 text-sm w-32 rounded-lg py-1 px-3 left-1/2 transform -translate-x-1/2 mb-1 shadow-lg border border-green-200 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        {content}
+        <svg className="absolute text-amber-50 h-2 w-full left-0 top-full" x="0px" y="0px" viewBox="0 0 255 255">
+          <polygon className="fill-current" points="0,0 127.5,127.5 255,0"/>
+        </svg>
+      </div>
+    </div>
+  );
+};
 
 function Navigation() {
-  const [showCart, setShowCart] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   const navigate = useNavigate();
 
-  const handleCartClick = (e) => {
-    e.preventDefault();
-    setShowCart(true);
-  };
+  const toggleMenu = useCallback(() => setIsMenuOpen(prev => !prev), []);
+  const toggleDropdown = useCallback(() => setIsDropdownOpen(prev => !prev), []);
+  const toggleUserDropdown = useCallback(() => setIsUserDropdownOpen(prev => !prev), []);
 
-  const toggleMenu = () => setIsMenuOpen((prev) => !prev);
+  const renderMenuItem = (item) => (
+    <li key={item} className="flex items-center">
+      <a
+        className="block no-underline hover:text-amber-200 transition-colors duration-300 relative group"
+        href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+      >
+        {item}
+        <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-200 transition-all duration-300 group-hover:w-full"></span>
+      </a>
+    </li>
+  );
 
   return (
-    <nav className="bg-green-600 p-4 fixed w-full z-50">
+    <nav className="bg-gradient-to-r from-green-800 to-green-900 p-6 block w-full z-50 shadow-md">
       <div className="container mx-auto flex items-center justify-between">
-        <div className="flex items-center">
-          <img src={icon} alt="Logo" />
-          <h1 className="text-white text-xl font-bold font-mono">LEAF BLOOM</h1>
+        <div className="flex items-center space-x-2">
+          <Leaf className="text-amber-200 w-8 h-8" />
+          <h1 className="text-amber-100 text-2xl font-bold font-serif">LEAF BLOOM</h1>
         </div>
-        <button className="md:hidden text-white" onClick={toggleMenu}>
-          {isMenuOpen ? (
-            <X className="w-6 h-6" />
-          ) : (
-            <Menu className="w-6 h-6" />
-          )}
+        <button className="md:hidden text-amber-100 hover:text-amber-200 transition-colors duration-300" onClick={toggleMenu}>
+          {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
         <ul
           className={`${
             isMenuOpen ? "flex" : "hidden"
-          } md:flex flex-col md:flex-row absolute md:relative left-0 right-0 top-16 md:top-auto bg-green-500 md:bg-transparent p-4 md:p-0 space-y-4 md:space-y-0 md:space-x-6 text-white items-center`}
+          } md:flex flex-col md:flex-row absolute md:relative left-0 right-0 top-20 md:top-auto bg-green-800 md:bg-transparent p-6 md:p-0 space-y-4 md:space-y-0 md:space-x-8 text-amber-100 items-center rounded-b-lg md:rounded-none shadow-lg md:shadow-none`}
         >
-          {["Home", "About", "Contact", "Blog", "community"].map((item) => (
-            <li key={item} className="flex items-center">
-              <a
-                className="block no-underline hover:underline"
-                href={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-              >
-                {item}
-              </a>
-            </li>
-          ))}
+          {MENU_ITEMS.map(renderMenuItem)}
           <li className="relative">
-            <button
-              className="flex items-center no-underline hover:underline"
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            >
-              Plants{" "}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="w-4 h-4 ml-2"
+            <Tooltip content="Explore our botanical treasures">
+              <button
+                className="flex items-center no-underline hover:text-amber-200 transition-colors duration-300 group"
+                onClick={toggleDropdown}
               >
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </button>
+                Plants <ChevronDown className="w-4 h-4 ml-2 group-hover:rotate-180 transition-transform duration-300" />
+              </button>
+            </Tooltip>
             {isDropdownOpen && (
-              <ul className="absolute left-0 bg-green-500 p-4 rounded-md mt-2">
-                <li>
-                  <a
-                    href="/plant-encyclopedia"
-                    className="block no-underline hover:underline text-white"
-                  >
-                    Plant Encyclopedia
-                  </a>
-                </li>
-                <li className="mt-2">
-                  <a
-                    href="/products"
-                    className="block no-underline hover:underline text-white"
-                  >
-                    Products
-                  </a>
-                </li>
+              <ul className="absolute top-8 right-0 mt-2 w-48 bg-amber-50 rounded-md shadow-lg py-2 z-10">
+                {PLANT_SUBMENU.map(({ name, path }) => (
+                  <li key={name}>
+                    <a
+                      href={path}
+                      className="block px-4 py-2 text-sm text-green-800 hover:bg-amber-100 hover:text-green-900 transition-colors duration-300"
+                    >
+                      {name}
+                    </a>
+                  </li>
+                ))}
               </ul>
             )}
           </li>
-
           <div className="relative flex items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              className="w-6 h-6 cursor-pointer"
-              onClick={() => setIsDropdownOpen((prev) => !prev)}
-            >
-              <path d="M12 2a5 5 0 1 0 5 5 5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3 3 3 0 0 1-3 3zm9 11v-1a7 7 0 0 0-7-7h-4a7 7 0 0 0-7 7v1h2v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1z"></path>
-            </svg>
-            {isDropdownOpen && (
-              <div className="absolute right-0 mt-2 w-32 mx-auto bg-green-50 rounded-md shadow-lg py-1 z-10">
-                <button
-                  onClick={() => navigate("/signIn")}
-                  className="block px-4 py-2 text-sm text-black hover:bg-green-200 w-full text-left"
-                >
-                  Sign In
-                </button>
-                <button
-                  onClick={() => navigate("/signUp")}
-                  className="block px-4 py-2 text-sm text-black hover:bg-green-200 w-full text-left"
-                >
-                  Sign Up
-                </button>
+            <Tooltip content="Tend to your account">
+              <User
+                className="w-6 h-6 cursor-pointer text-amber-100 hover:text-amber-200 transition-colors duration-300"
+                onClick={toggleUserDropdown}
+              />
+            </Tooltip>
+            {isUserDropdownOpen && (
+              <div className="absolute top-8 right-0 mt-2 w-36 bg-amber-50 rounded-md shadow-lg py-2 z-10">
+                {["Sign In", "Sign Up"].map((action) => (
+                  <button
+                    key={action}
+                    onClick={() => navigate(`/${action.toLowerCase().replace(" ", "")}`)}
+                    className="block w-full px-4 py-2 text-sm text-green-800 hover:bg-amber-100 hover:text-green-900 transition-colors duration-300 text-left"
+                  >
+                    {action}
+                  </button>
+                ))}
               </div>
             )}
           </div>
           <div>
-            <button
-              onClick={() => navigate("/cart")}
-              aria-label="View Cart"
-              className="text-green-600 flex items-center"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 256 256"
-                id="IconChangeColor"
-                className="h-16 w-16"
+            <Tooltip content="Your botanical basket">
+              <button
+                onClick={() => navigate("/cart")}
+                aria-label="View Cart"
+                className="text-amber-100 hover:text-amber-200 transition-colors duration-300"
               >
-                <rect width="40" height="40" fill="none"></rect>
-                <circle cx="80" cy="216" r="12"></circle>
-                <circle cx="184" cy="216" r="12"></circle>
-                <path
-                  d="M42.3,72H221.7l-26.4,92.4A15.9,15.9,0,0,1,179.9,176H84.1a15.9,15.9,0,0,1-15.4-11.6L32.5,37.8A8,8,0,0,0,24.8,32H8"
-                  fill="none"
-                  stroke="white"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  id="mainIconPathAttribute"
-                ></path>
-              </svg>
-            </button>
+                <ShoppingBag className="w-6 h-6"/>
+              </button>
+            </Tooltip>
           </div>
         </ul>
       </div>

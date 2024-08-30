@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_KEY = process.env.REACT_APP_API_KEY;
+const API_KEY = process.env.REACT_APP_API_KEY2;
 const BASE_URL = 'https://perenual.com/api';
 
 export const getPlants = async (page = 1, filters = {}) => {
