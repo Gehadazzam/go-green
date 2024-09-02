@@ -4,6 +4,13 @@ module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
     extend: {
+      colors: {
+        primary: "#DAD7CD",
+        secondary: "#A3B18A",
+        tertiary: "#588157",
+        quaternary: "#3A5A40",
+        quinary: "#344E41",
+      },
       backgroundImage: {
         smallland: "url('landsmall.jpg')",
         land: "url('landbg.jpg')",
