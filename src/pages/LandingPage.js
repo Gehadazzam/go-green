@@ -17,13 +17,13 @@ const LandingPage = () => {
           <div className="space-x-4 text-right lg:text-left">
             <Link
               to="/signup"
-              className="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+              className="bg-tertiary hover:bg-quinary text-white font-bold py-2 px-4 rounded"
             >
               Sign Up
             </Link>
             <Link
               to="/signin"
-              className="bg-white hover:bg-green-100 text-green-500 font-bold py-2 px-4 rounded border border-green-500"
+              className="bg-white hover:bg-green-100 text-quinary font-bold py-2 px-4 rounded border border-quinary"
             >
               Sign In
             </Link>
