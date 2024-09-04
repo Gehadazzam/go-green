@@ -1,15 +1,15 @@
-import React from 'react';
-import CartItem from '../redux/CartItem';  // Import the CartItem component
+import React from "react";
+import CartItem from "../redux/CartItem";
 
 function Cart() {
   const handleContinueShopping = () => {
-    window.location.href = "/products";  // Redirect to the Products page
+    window.location.href = "/products";
   };
 
   return (
     <div>
-      <h1>Your Cart</h1>
-      <CartItem onContinueShopping={handleContinueShopping} />  {/* Render CartItem */}
+      <CartItem onContinueShopping={handleContinueShopping} />{" "}
+      {/* Render CartItem */}
     </div>
   );
 }
