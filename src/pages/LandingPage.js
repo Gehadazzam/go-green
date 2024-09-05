@@ -49,7 +49,7 @@ const LandingPage = () => {
         viewport={{ once: true, amount: 0.8 }}
       >
         <motion.img
-          className="w-11/12 md:w-1/2 lg:w-1/3 mx-auto rounded-xl"
+          className="w-11/12 md:w-1/2 lg:w-1/3 mx-auto rounded-xl transition-opacity"
           alt="Decorate Your home with customize plants"
           src={require("../kam-idris-_HqHX3LBN18-unsplash.jpg")}
           initial={{ opacity: 0, translateY: "100%" }}
@@ -94,7 +94,7 @@ const LandingPage = () => {
         whileInView={{ opacity: 1, translateY: "0" }}
       >
         <h2 className="font-bold text-xl md:text-2xl flex justify-center">
-          Featured Catigory
+          Featured Catigories
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8 px-4 md-px-8 lg:px-12">
           <div className="relative group">

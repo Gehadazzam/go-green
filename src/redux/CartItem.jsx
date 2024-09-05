@@ -72,7 +72,7 @@ const CartItem = ({ onContinueShopping = () => {} }) => {
       </div>
       <div className="flex flex-col items-center justify-between gap-4 md:gap-8 mb-8">
         {cart.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {cart.map((item) => (
               <div className="flex flex-col items-center" key={item.name}>
                 <img

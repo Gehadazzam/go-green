@@ -81,6 +81,7 @@ const Community = () => {
         />
         <input
           type="file"
+          required
           onChange={(e) => setImage(e.target.files[0])}
           className="mb-2"
         />
